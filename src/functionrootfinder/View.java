@@ -3,6 +3,8 @@ package functionrootfinder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -12,6 +14,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -28,8 +31,13 @@ public class View {
   private XYSeries newtonSeries;
   private JSpinner decimalSpinner;
   private JTextField newtonTextfield;
+  private JTextField functionTextfield;
+
+  private final int boxHeight = 31;
 
   public View() {
+    GridBagConstraints gbc = new GridBagConstraints();
+
     frame = new JFrame();
 
     decimalSpinner = new JSpinner(new SpinnerNumberModel(5, 0, null, 1));
@@ -43,12 +51,15 @@ public class View {
     functionSeries = new XYSeries("Function");
     newtonSeries = new XYSeries("Newton Raphson");
 
-    int boxHeight = 31;
-
     //<editor-fold defaultstate="collapsed" desc="Newton Raphson [Label + TextField]">
     newtonTextfield = new JTextField("9");
     newtonTextfield.setPreferredSize(new Dimension(100, boxHeight));
     JLabel newtonLabel = new JLabel("<html>x<sub>0</sub></html>");
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Function [Textfield]">
+    functionTextfield = new JTextField();
+    functionTextfield.setPreferredSize(new Dimension(50, boxHeight));
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Function [ComboBox]">
@@ -66,15 +77,37 @@ public class View {
 
     JPanel componentPanel = new JPanel();
     componentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE)));
+    componentPanel.setLayout(new GridBagLayout());
+
+    JPanel optionsPanel = new JPanel();
+    optionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN)));
 
     JPanel newtonPanel = new JPanel();
     newtonPanel.setBorder(BorderFactory.createTitledBorder("Newton Raphson"));
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    componentPanel.add(newtonPanel, gbc);
 
     JPanel decimalPanel = new JPanel();
     decimalPanel.setBorder(BorderFactory.createTitledBorder("Decimals"));
+    gbc.gridx = 1;
+    gbc.gridy = 1;
+    componentPanel.add(decimalPanel, gbc);
 
     JPanel functionPanel = new JPanel();
     functionPanel.setBorder(BorderFactory.createTitledBorder("Function"));
+    gbc.gridx = 2;
+    gbc.gridy = 1;
+    componentPanel.add(functionPanel, gbc);
+
+    JPanel functionTextPanel = new JPanel();
+    functionTextPanel.setBorder(new TitledBorder("Function Equation"));
+    functionTextPanel.setLayout(new BorderLayout());
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    gbc.gridwidth = 3;
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    componentPanel.add(functionTextPanel, gbc);
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="JFreeChart">
@@ -102,14 +135,12 @@ public class View {
     //<editor-fold defaultstate="collapsed" desc="Interface adding">
     frame.add(mainPanel);
 
-    mainPanel.add(componentPanel, BorderLayout.EAST);
+    mainPanel.add(optionsPanel, BorderLayout.EAST);
     mainPanel.add(graphPanel, BorderLayout.CENTER);
 
-    graphPanel.add(graphChartPanel);
+    optionsPanel.add(componentPanel, BorderLayout.NORTH);
 
-    componentPanel.add(newtonPanel);
-    componentPanel.add(decimalPanel);
-    componentPanel.add(functionPanel);
+    graphPanel.add(graphChartPanel);
 
     newtonPanel.add(newtonLabel);
     newtonPanel.add(newtonTextfield);
@@ -117,6 +148,8 @@ public class View {
     decimalPanel.add(decimalSpinner);
 
     functionPanel.add(functionCombobox);
+
+    functionTextPanel.add(functionTextfield);
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Default Window Settings">
@@ -130,7 +163,11 @@ public class View {
 
   public JComboBox getFunctionCombobox() {
     return functionCombobox;
-  }  
+  }
+
+  public JTextField getFunctionTextfield() {
+    return functionTextfield;
+  }
 
   public XYSeries getFunctionGraph() {
     return functionSeries;

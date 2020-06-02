@@ -1,10 +1,14 @@
 package functionrootfinder;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jfree.data.xy.XYSeries;
 
 public class Function {
 
   private View view;
+
+  private final Pattern monomial = Pattern.compile("([+-])?(\\d+)?x(?:\\^(\\d+))?");
 
   public Function() {
 
@@ -12,13 +16,6 @@ public class Function {
 
   public Function(View view) {
     this.view = view;
-  }
-
-  //Clear (x, y) plot data
-  public void clearPlotData(XYSeries series) {
-    if (!series.isEmpty()) {
-      series.clear();
-    }
   }
 
   //Function Calculation
@@ -49,6 +46,26 @@ public class Function {
     }
   }
 
+  public double evaluatePolynomial(String coefficients, String constant) {
+    Matcher matcher = monomial.matcher(coefficients);
+    double x = Double.parseDouble(constant);
+
+    double total = 0;
+    while (matcher.find()) {
+      String multiple = matcher.group(2);
+      double value = (multiple == null) ? 1 : Double.parseDouble(matcher.group(2));
+
+      String power = matcher.group(3);
+      value *= (power == null) ? x : (int) Math.pow(x, Double.parseDouble(power));
+
+      if ("-".equals(matcher.group(1))) {
+        value = -value;
+      }
+      total += value;
+    }
+    return total;
+  }
+
   public void plotGraph() {
     //Positive
     for (double x = 0; x < 10; x += 0.05) {
@@ -64,6 +81,13 @@ public class Function {
         break;
       }
       view.getFunctionGraph().add(x, f(x));
+    }
+  }
+
+  //Clear (x, y) plot data
+  public void clearPlotData(XYSeries series) {
+    if (!series.isEmpty()) {
+      series.clear();
     }
   }
 }

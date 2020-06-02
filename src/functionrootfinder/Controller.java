@@ -30,6 +30,23 @@ public class Controller {
       newton.approximateRoot();
     });
 
+    this.view.getFunctionTextfield().getDocument().addDocumentListener(new DocumentListener() {
+      @Override
+      public void insertUpdate(DocumentEvent e) {
+        System.out.println("insertUpdate has not been coded yet.");
+      }
+
+      @Override
+      public void removeUpdate(DocumentEvent e) {
+        System.out.println("removeUpdate has not been coded yet.");
+      }
+
+      @Override
+      public void changedUpdate(DocumentEvent e) {
+        System.out.println("changedUpdate has not been coded yet.");
+      }
+    });
+
     this.view.getNewtonTextfield().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void insertUpdate(DocumentEvent de) {
