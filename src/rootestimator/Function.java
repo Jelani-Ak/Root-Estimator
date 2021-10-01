@@ -40,13 +40,6 @@ public class Function {
     }
   }
 
-  //Clear (x, y) plot data
-  public void clearPlotData(XYSeries series) {
-    if (!series.isEmpty()) {
-      series.clear();
-    }
-  }
-
   //Format the decimal places of a number to a user specified value
   public String setDecimalPoint(Double number) {
     return String.format("%." + (int) view.getDecimalSpinner().getValue() + "f", number);
@@ -55,17 +48,24 @@ public class Function {
   private double evaluate(String polynomial, double x) {
     Matcher matcher = monomial.matcher(polynomial);
 
+    double value;
     double total = 0.0;
-    while (matcher.find()) {
-      String digit = matcher.group(2);
-      double value = (digit == null) ? 1 : Double.parseDouble(matcher.group(2));
-      String power = matcher.group(3);
-      value *= (power == null) ? x : (double) Math.pow(x, Double.parseDouble(power));
 
-      if ("-".equals(matcher.group(1))) {
-        value = -value;
+    try {
+      while (matcher.find()) {
+        String digit = matcher.group(2);
+        value = (digit == null) ? 1 : Double.parseDouble(matcher.group(2));
+
+        String power = matcher.group(3);
+        value *= (power == null) ? x : (double) Math.pow(x, Double.parseDouble(power));
+
+        if ("-".equals(matcher.group(1))) {
+          value = -value;
+        }
+        total += value;
       }
-      total += value;
+    } catch (NumberFormatException nfe) {
+
     }
     return total;
   }

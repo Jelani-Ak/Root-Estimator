@@ -16,10 +16,11 @@ public class Controller {
     this.model = model;
     this.view = view;
 
-    function = new Function(this.view);
-    newton = new NewtonRaphson(this.view);
-    secant = new Secant(this.view);
+    function = new Function(view);
+    newton = new NewtonRaphson(view);
+    secant = new Secant(view);
 
+    //Default on application open
     function.plot();
     newton.getRoot();
     secant.getRoot();
@@ -29,17 +30,17 @@ public class Controller {
     this.view.getFunctionTextfield().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void insertUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getFunctionSeries());
-        function.clearPlotData(view.getNewtonSeries());
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getFunctionSeries());
+        view.clearPlotData(view.getNewtonSeries());
+        view.clearPlotData(view.getSecantSeries());
         function.plot();
       }
 
       @Override
       public void removeUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getFunctionSeries());
-        function.clearPlotData(view.getNewtonSeries());
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getFunctionSeries());
+        view.clearPlotData(view.getNewtonSeries());
+        view.clearPlotData(view.getSecantSeries());
         function.plot();
       }
 
@@ -55,16 +56,14 @@ public class Controller {
     this.view.getNewtonTextfield().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void insertUpdate(DocumentEvent de) {
-        function.clearPlotData(view.getNewtonSeries());
+        view.clearPlotData(view.getNewtonSeries());
         newton.getRoot();
-        System.out.println("Insert Update " + newton.getCount());
       }
 
       @Override
       public void removeUpdate(DocumentEvent de) {
-        function.clearPlotData(view.getNewtonSeries());
+        view.clearPlotData(view.getNewtonSeries());
         newton.getRoot();
-        System.out.println("Changed Update " + newton.getCount());
       }
 
       @Override
@@ -79,13 +78,13 @@ public class Controller {
     this.view.getSecantTextfieldOne().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void insertUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getSecantSeries());
         secant.getRoot();
       }
 
       @Override
       public void removeUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getSecantSeries());
         secant.getRoot();
       }
 
@@ -98,13 +97,13 @@ public class Controller {
     this.view.getSecantTextfieldTwo().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void insertUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getSecantSeries());
         secant.getRoot();
       }
 
       @Override
       public void removeUpdate(DocumentEvent e) {
-        function.clearPlotData(view.getSecantSeries());
+        view.clearPlotData(view.getSecantSeries());
         secant.getRoot();
       }
 

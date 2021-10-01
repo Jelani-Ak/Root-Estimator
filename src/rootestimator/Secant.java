@@ -2,7 +2,7 @@ package rootestimator;
 
 public class Secant {
 
-  private View view;
+  private final View view;
   private Function function;
 
   private int count;
@@ -36,6 +36,7 @@ public class Secant {
 
     do {
       count++;
+      
       xnew = x - function.f(x) * (x - xold) / (function.f(x) - function.f(xold));
       y = function.f(xnew);
 
@@ -53,8 +54,6 @@ public class Secant {
         view.getSecantSeries().add(xnew, 0);
         view.getSecantSeries().add(xnew, y);
       }
-
-      System.out.println(xnew);
       
       difference = Math.abs(xold - x);
       xold = x;

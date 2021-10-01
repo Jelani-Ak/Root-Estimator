@@ -46,14 +46,14 @@ public class View {
 
     //<editor-fold defaultstate="collapsed" desc="Panels">
     JPanel mainPanel = new JPanel(new BorderLayout());
-    mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
+//    mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
 
     JPanel componentPanel = new JPanel();
-    componentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
+//    componentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
     componentPanel.setLayout(new GridBagLayout());
 
     JPanel optionsPanel = new JPanel();
-    optionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
+//    optionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
 
     JPanel functionTextPanel = new JPanel();
     functionTextPanel.setBorder(new TitledBorder("Function"));
@@ -255,5 +255,12 @@ public class View {
 
   public int getNegativeRange() {
     return 0; //To be implemented
+  }
+
+  //Clear (x, y) plot data
+  public void clearPlotData(XYSeries series) {
+    if (!series.isEmpty()) {
+      series.clear();
+    }
   }
 }
