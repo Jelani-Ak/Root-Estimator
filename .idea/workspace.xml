@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2b98088-6e03-40e4-afd5-484598250eb0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ant.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfreechart_1_5_0_javadoc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Root-Estimator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FunctionRootFinder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FunctionRootFinder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rootestimator/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rootestimator/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rootestimator/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rootestimator/Function.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rootestimator/Secant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rootestimator/Secant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rootestimator/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rootestimator/View.java" afterDir="false" />
-    </list>
+    <list default="true" id="e2b98088-6e03-40e4-afd5-484598250eb0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +66,8 @@
       <updated>1579879685223</updated>
       <workItem from="1579879686426" duration="147000" />
       <workItem from="1631546123184" duration="3721000" />
+      <workItem from="1633054472737" duration="284000" />
+      <workItem from="1634754733654" duration="101000" />
     </task>
     <servers />
   </component>
@@ -98,5 +84,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
