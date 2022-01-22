@@ -1,8 +1,6 @@
 package rootestimator;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -15,12 +13,12 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class View {
-
     private final XYSeries functionSeries;
     private final XYSeries newtonSeries;
     private final XYSeries secantSeries;
 
     private final JSpinner decimalSpinner;
+
     private final JTextField toleranceTextField;
 
     private final JTextField functionTextfield;
@@ -30,6 +28,14 @@ public class View {
     private final JTextField secantTextfieldTwo;
     private final JTextField bisectionTextfieldOne;
     private final JTextField bisectionTextfieldTwo;
+
+    private final JButton functionOneButton;
+    private final JButton functionTwoButton;
+    private final JButton functionThreeButton;
+
+    private final JCheckBox newtonCheckBox;
+    private final JCheckBox secantCheckBox;
+    private final JCheckBox bisectionCheckBox;
 
     private final int HEIGHT = 31;
     private final int WIDTH = 125;
@@ -45,14 +51,14 @@ public class View {
 
         //<editor-fold defaultstate="collapsed" desc="Panels">
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
+//        mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
 
         JPanel componentPanel = new JPanel();
-        componentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
+//        componentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
         componentPanel.setLayout(new GridBagLayout());
 
         JPanel optionsPanel = new JPanel();
-        optionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
+//        optionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
 
         JPanel toggleMethodsPanel = new JPanel();
         toggleMethodsPanel.setBorder(new TitledBorder("Toggle Method Visibility"));
@@ -62,9 +68,9 @@ public class View {
         gbc.gridy = gridYPosition;
         componentPanel.add(toggleMethodsPanel, gbc);
 
-        JCheckBox newtonCheckBox = new JCheckBox("Newton");
-        JCheckBox secantCheckBox = new JCheckBox("Secant");
-        JCheckBox bisectionCheckBox = new JCheckBox("Bisection");
+        newtonCheckBox = new JCheckBox("Newton");
+        secantCheckBox = new JCheckBox("Secant");
+        bisectionCheckBox = new JCheckBox("Bisection");
         toggleMethodsPanel.add(newtonCheckBox);
         toggleMethodsPanel.add(secantCheckBox);
         toggleMethodsPanel.add(bisectionCheckBox);
@@ -77,41 +83,9 @@ public class View {
         gbc.gridy = ++gridYPosition;
         componentPanel.add(exampleFunctionsTextPanel, gbc);
 
-        JButton functionOneButton = new JButton("<html>x - x<sup>2</sup></hmtl>");
-        functionOneButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                functionTextfield.setText("x-x^2");
-                derivativeTextfield.setText("1-2x");
-                newtonTextfield.setText("9");
-                secantTextfieldOne.setText("8");
-                secantTextfieldTwo.setText("10");
-            }
-        });
-
-        JButton functionTwoButton = new JButton("ln(x + 1) + 1");
-        functionTwoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                functionTextfield.setText("ln(x + 1) + 1");
-                derivativeTextfield.setText("1 / (x + 1)");
-                newtonTextfield.setText("-0.95");
-                secantTextfieldOne.setText("-0.95");
-                secantTextfieldTwo.setText("1");
-            }
-        });
-
-        JButton functionThreeButton = new JButton("<html>e<sup>x</sup> - 3x</hmtl>");
-        functionThreeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                functionTextfield.setText("e^x - 3x");
-                derivativeTextfield.setText("e^x - 3");
-                newtonTextfield.setText("3.5");
-                secantTextfieldOne.setText("-1.5");
-                secantTextfieldTwo.setText("3.5");
-            }
-        });
+        functionOneButton = new JButton("<html>x - x<sup>2</sup></hmtl>");
+        functionTwoButton = new JButton("ln(x + 1) + 1");
+        functionThreeButton = new JButton("<html>e<sup>x</sup> - 3x</hmtl>");
 
         exampleFunctionsTextPanel.add(functionOneButton);
         exampleFunctionsTextPanel.add(functionTwoButton);
@@ -382,6 +356,30 @@ public class View {
 
     public JTextField getToleranceTextField() {
         return toleranceTextField;
+    }
+
+    public JCheckBox getNewtonCheckBox() {
+        return newtonCheckBox;
+    }
+
+    public JCheckBox getSecantCheckBox() {
+        return secantCheckBox;
+    }
+
+    public JCheckBox getBisectionCheckBox() {
+        return bisectionCheckBox;
+    }
+
+    public JButton getFunctionOneButton() {
+        return functionOneButton;
+    }
+
+    public JButton getFunctionTwoButton() {
+        return functionTwoButton;
+    }
+
+    public JButton getFunctionThreeButton() {
+        return functionThreeButton;
     }
 
     public int getPositiveRange() {

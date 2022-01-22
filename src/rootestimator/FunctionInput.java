@@ -1,17 +1,12 @@
 package rootestimator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
-import org.jfree.data.xy.XYSeries;
-
-public class Function {
-
+public class FunctionInput {
     private final View view;
 
-    private final Pattern monomial = Pattern.compile("([+-])?(\\d+)?x(?:\\^(\\d+))?");
-
-    public Function(View view) {
+    public FunctionInput(View view) {
         this.view = view;
     }
 
@@ -46,29 +41,13 @@ public class Function {
 
     //User entered polynomial evaluation
     private double evaluate(String polynomial, double x) {
-        var matcher = monomial.matcher(polynomial);
+        Expression expression = new ExpressionBuilder(polynomial)
+                .variables("x", "ln", "e")
+                .build()
+                .setVariable("x", x)
+                .setVariable("ln", Math.log(x))
+                .setVariable("e", Math.E);
 
-        double value;
-        double total = 0.0;
-
-        try {
-            while (matcher.find()) {
-                String digit = matcher.group(2);
-                value = (digit == null) ? 1 : Double.parseDouble(matcher.group(2));
-
-                String power = matcher.group(3);
-                value *= (power == null) ? x : (double) Math.pow(x, Double.parseDouble(power));
-
-                if ("-".equals(matcher.group(1))) {
-                    value = -value;
-                }
-
-                total += value;
-            }
-        } catch (NumberFormatException nfe) {
-            // Do Nothing
-        }
-
-        return total;
+        return expression.evaluate();
     }
 }

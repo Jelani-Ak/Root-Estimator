@@ -1,7 +1,9 @@
-package rootestimator;
+package numericalMethods;
+
+import rootestimator.FunctionInput;
+import rootestimator.View;
 
 public class Bisection {
-
     private final View view;
 
     private int count;
@@ -11,13 +13,12 @@ public class Bisection {
     }
 
     public double getRoot() {
-        var function = new Function(this.view);
+        var function = new FunctionInput(this.view);
 
         count = 0;
         double lowerBound;
-        double functionlowerBound;
         double UpperBound;
-        double functionUpperBound;
+        double middle;
 
         try {
             if (view.bisectionTextfieldsAreEmpty()) {

@@ -1,44 +1,41 @@
 package rootestimator;
 
+import numericalMethods.NewtonRaphson;
+import numericalMethods.Secant;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controller {
-
-    private final Function function;
-    private final NewtonRaphson newton;
-    private final Secant secant;
-
     public Controller(View view) {
+        FunctionInput function = new FunctionInput(view);
+        NewtonRaphson newton = new NewtonRaphson(view);
+        Secant secant = new Secant(view);
 
-        function = new Function(view);
-        newton = new NewtonRaphson(view);
-        secant = new Secant(view);
+        Plot plot = new Plot(view, function, newton, secant);
 
         //Default on application open
         function.plot();
-        newton.getRoot();
-        secant.getRoot();
+//        newton.getRoot();
+//        secant.getRoot();
 
-        //Example Functions
+        view.getFunctionOneButton().addActionListener(e -> plot.exampleFunctionOne());
+        view.getFunctionTwoButton().addActionListener(e -> plot.exampleFunctionTwo());
+        view.getFunctionThreeButton().addActionListener(e -> plot.exampleFunctionThree());
 
         //Update Function
         //<editor-fold defaultstate="collapsed" desc="Function">
         view.getFunctionTextfield().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getFunctionSeries());
-                view.clearPlotData(view.getNewtonSeries());
-                view.clearPlotData(view.getSecantSeries());
-                function.plot();
+                plot.function();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getFunctionSeries());
-                view.clearPlotData(view.getNewtonSeries());
-                view.clearPlotData(view.getSecantSeries());
-                function.plot();
+                plot.function();
             }
 
             @Override
@@ -53,14 +50,12 @@ public class Controller {
         view.getNewtonTextfield().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
-                view.clearPlotData(view.getNewtonSeries());
-                newton.getRoot();
+                if (view.getNewtonCheckBox().isSelected()) plot.newton();
             }
 
             @Override
             public void removeUpdate(DocumentEvent de) {
-                view.clearPlotData(view.getNewtonSeries());
-                newton.getRoot();
+                if (view.getNewtonCheckBox().isSelected()) plot.newton();
             }
 
             @Override
@@ -75,14 +70,12 @@ public class Controller {
         view.getSecantTextfieldOne().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getSecantSeries());
-                secant.getRoot();
+                plot.secant();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getSecantSeries());
-                secant.getRoot();
+                plot.secant();
             }
 
             @Override
@@ -94,14 +87,12 @@ public class Controller {
         view.getSecantTextfieldTwo().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getSecantSeries());
-                secant.getRoot();
+                plot.secant();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                view.clearPlotData(view.getSecantSeries());
-                secant.getRoot();
+                plot.secant();
             }
 
             @Override
