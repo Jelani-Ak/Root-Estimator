@@ -1,6 +1,6 @@
 package numericalMethods;
 
-import rootestimator.FunctionInput;
+import rootestimator.Function;
 import rootestimator.View;
 
 public class Secant {
@@ -13,14 +13,14 @@ public class Secant {
     }
 
     public double getRoot() {
-        var function = new FunctionInput(this.view);
+        var function = new Function(this.view);
 
         count = 0;
         double xnew;
         double xold = 0.0;
         double x = 0.0;
-        double y = 0.0;
-        double difference = 0.0;
+        double y;
+        double difference;
 
         try {
             if (view.secantTextfieldsAreEmpty()) {

@@ -7,11 +7,11 @@ public class Plot {
 
     private final View view;
 
-    private final FunctionInput functionInput;
+    private final Function functionInput;
     private final NewtonRaphson newton;
     private final Secant secant;
 
-    public Plot(View view, FunctionInput functionInput, NewtonRaphson newton, Secant secant) {
+    public Plot(View view, Function functionInput, NewtonRaphson newton, Secant secant) {
         this.view = view;
         this.functionInput = functionInput;
         this.newton = newton;
@@ -46,7 +46,7 @@ public class Plot {
 
     // Plot ln(x + 1) + 1
     public void exampleFunctionTwo() {
-        view.getFunctionTextfield().setText("ln(x+1)+1");
+        view.getFunctionTextfield().setText("loge(x+1)+1");
         view.getDerivativeTextfield().setText("1/(x+1)");
         if (view.getNewtonCheckBox().isSelected()) view.getNewtonTextfield().setText("-0.95");
         if (view.getSecantCheckBox().isSelected()) {

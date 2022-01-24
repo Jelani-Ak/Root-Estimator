@@ -29,6 +29,11 @@ public class View {
     private final JTextField bisectionTextfieldOne;
     private final JTextField bisectionTextfieldTwo;
 
+    private final JSpinner lowerRangeSpinner;
+    private final JSpinner upperRangeSpinner;
+    private final JSpinner plotAccuracySpinner;
+
+
     private final JButton functionOneButton;
     private final JButton functionTwoButton;
     private final JButton functionThreeButton;
@@ -84,7 +89,7 @@ public class View {
         componentPanel.add(exampleFunctionsTextPanel, gbc);
 
         functionOneButton = new JButton("<html>x - x<sup>2</sup></hmtl>");
-        functionTwoButton = new JButton("ln(x + 1) + 1");
+        functionTwoButton = new JButton("loge(x + 1) + 1");
         functionThreeButton = new JButton("<html>e<sup>x</sup> - 3x</hmtl>");
 
         exampleFunctionsTextPanel.add(functionOneButton);
@@ -126,8 +131,6 @@ public class View {
         methodsTabbedPane.addTab("Bisection", bisectionTextPanel);
         componentPanel.add(methodsTabbedPane, gbc);
 
-        gridXPosition = 0;
-
         JPanel decimalPanel = new JPanel();
         decimalPanel.setBorder(BorderFactory.createTitledBorder("Decimal Places"));
         decimalPanel.setLayout(new BorderLayout());
@@ -143,6 +146,38 @@ public class View {
         gbc.gridx = ++gridXPosition;
         gbc.gridy = gridYPosition;
         componentPanel.add(differencePanel, gbc);
+
+        JPanel functionRangePanel = new JPanel();
+        functionRangePanel.setBorder(BorderFactory.createTitledBorder("Function Range"));
+        functionRangePanel.setLayout(new GridLayout());
+        gbc.gridwidth = 2;
+        gbc.gridx = --gridXPosition;
+        gbc.gridy = ++gridYPosition;
+        componentPanel.add(functionRangePanel, gbc);
+
+        JPanel lowerRangePanel = new JPanel();
+        lowerRangePanel.setBorder(BorderFactory.createTitledBorder("Lower"));
+        lowerRangePanel.setLayout(new BorderLayout());
+        gbc.gridwidth = 2;
+        gbc.gridx = gridXPosition;
+        gbc.gridy = ++gridYPosition;
+        componentPanel.add(lowerRangePanel, gbc);
+
+        JPanel upperRangePanel = new JPanel();
+        upperRangePanel.setBorder(BorderFactory.createTitledBorder("Upper"));
+        upperRangePanel.setLayout(new BorderLayout());
+        gbc.gridwidth = 2;
+        gbc.gridx = ++gridXPosition;
+        gbc.gridy = gridYPosition;
+        componentPanel.add(upperRangePanel, gbc);
+
+        JPanel plotAccuracyPanel = new JPanel();
+        plotAccuracyPanel.setBorder(BorderFactory.createTitledBorder("Plot Accuracy"));
+        plotAccuracyPanel.setLayout(new BorderLayout());
+        gbc.gridwidth = 2;
+        gbc.gridx = --gridXPosition;
+        gbc.gridy = ++gridYPosition;
+        componentPanel.add(plotAccuracyPanel, gbc);
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="JFreeChart">
@@ -176,14 +211,10 @@ public class View {
         //</editor-fold>
 
         //<editor-fold desc="Newton Raphson">
-        gridYPosition = 1;
-
         JLabel newtonLabel = new JLabel("<html>x<sub>0</sub></html>");
         gbc.gridx = gridXPosition;
         gbc.gridy = gridYPosition;
         newtonTextPanel.add(newtonLabel, gbc);
-
-        gridXPosition = 1;
 
         newtonTextfield = new JTextField("9");
         newtonTextfield.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -253,6 +284,18 @@ public class View {
         toleranceTextField.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         toleranceTextField.setHorizontalAlignment(JTextField.RIGHT);
 
+        lowerRangeSpinner = new JSpinner(new SpinnerNumberModel(-10, null, 0, -1));
+        lowerRangeSpinner.setPreferredSize(new Dimension(WIDTH / 2, HEIGHT));
+        lowerRangeSpinner.getPreferredSize();
+
+        upperRangeSpinner = new JSpinner(new SpinnerNumberModel(11, 0, null, 1));
+        upperRangeSpinner.setPreferredSize(new Dimension(WIDTH / 2, HEIGHT));
+        upperRangeSpinner.getPreferredSize();
+
+        plotAccuracySpinner = new JSpinner(new SpinnerNumberModel(0.05, 0.01, null, 0.05));
+        plotAccuracySpinner.setPreferredSize(new Dimension(WIDTH / 2, HEIGHT));
+        plotAccuracySpinner.getPreferredSize();
+
 
         //<editor-fold defaultstate="collapsed" desc="Interface adding">
         frame.add(mainPanel);
@@ -272,6 +315,13 @@ public class View {
 
         differencePanel.add(toleranceTextField);
 
+        functionRangePanel.add(lowerRangePanel);
+        functionRangePanel.add(upperRangePanel);
+
+        lowerRangePanel.add(lowerRangeSpinner);
+        upperRangePanel.add(upperRangeSpinner);
+
+        plotAccuracyPanel.add(plotAccuracySpinner);
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Default Window Settings">
@@ -382,12 +432,16 @@ public class View {
         return functionThreeButton;
     }
 
-    public int getPositiveRange() {
-        return 0; //To be implemented
+    public JSpinner getLowerRangeSpinner() {
+        return lowerRangeSpinner;
     }
 
-    public int getNegativeRange() {
-        return 0; //To be implemented
+    public JSpinner getUpperRangeSpinner() {
+        return upperRangeSpinner;
+    }
+
+    public JSpinner getPlotAccuracySpinner() {
+        return plotAccuracySpinner;
     }
     //</editor-fold>
 

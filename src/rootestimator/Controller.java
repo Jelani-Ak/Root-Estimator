@@ -5,12 +5,10 @@ import numericalMethods.Secant;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Controller {
     public Controller(View view) {
-        FunctionInput function = new FunctionInput(view);
+        Function function = new Function(view);
         NewtonRaphson newton = new NewtonRaphson(view);
         Secant secant = new Secant(view);
 
@@ -25,7 +23,6 @@ public class Controller {
         view.getFunctionTwoButton().addActionListener(e -> plot.exampleFunctionTwo());
         view.getFunctionThreeButton().addActionListener(e -> plot.exampleFunctionThree());
 
-        //Update Function
         //<editor-fold defaultstate="collapsed" desc="Function">
         view.getFunctionTextfield().getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -45,7 +42,6 @@ public class Controller {
         });
         //</editor-fold>
 
-        //Update Newton Raphson
         //<editor-fold defaultstate="collapsed" desc="Newton Raphson">
         view.getNewtonTextfield().getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -63,9 +59,8 @@ public class Controller {
                 //Not used
             }
         });
-//</editor-fold>
+        //</editor-fold>
 
-        //Update Secant
         //<editor-fold defaultstate="collapsed" desc="Secant">
         view.getSecantTextfieldOne().getDocument().addDocumentListener(new DocumentListener() {
             @Override

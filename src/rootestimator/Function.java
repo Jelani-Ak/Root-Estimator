@@ -3,10 +3,13 @@ package rootestimator;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class FunctionInput {
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class Function {
     private final View view;
 
-    public FunctionInput(View view) {
+    public Function(View view) {
         this.view = view;
     }
 
@@ -19,33 +22,50 @@ public class FunctionInput {
     }
 
     public void plot() {
-        //Positive side
-        for (double x = 0; x <= 10.05; x += 0.05) {
+        final int UPPER_RANGE = (int) view.getUpperRangeSpinner().getValue();
+        final int LOWER_RANGE = (int) view.getLowerRangeSpinner().getValue();
+        final double PLOT_ACCURACY = (double) view.getPlotAccuracySpinner().getValue();
+
+        // Positive side
+        for (double x = 0.0; x <= UPPER_RANGE; x += PLOT_ACCURACY) {
             if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
 
             view.getFunctionSeries().add(x, f(x));
+//            System.out.println("x = " + x);
         }
 
-        //Negative side
-        for (double x = 0; x > -10.05; x -= 0.05) {
+        // Negative side
+        for (double x = 0.0; x >= LOWER_RANGE; x -= PLOT_ACCURACY) {
             if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
 
             view.getFunctionSeries().add(x, f(x));
+//            System.out.println("x = " + x);
         }
     }
 
-    //Format the decimal places of a number to a user specified value
+    // Format the decimal places of a number to a user specified value
     public String setDecimalPoint(Double number) {
         return String.format("%." + (int) view.getDecimalSpinner().getValue() + "f", number);
     }
 
-    //User entered polynomial evaluation
+    public String setSpecificDecimalPoint(Integer number, int x) {
+        return String.format("%." + x + "f", number);
+    }
+
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    // User entered polynomial evaluation
     private double evaluate(String polynomial, double x) {
         Expression expression = new ExpressionBuilder(polynomial)
-                .variables("x", "ln", "e")
+                .variables("x", "e")
                 .build()
                 .setVariable("x", x)
-                .setVariable("ln", Math.log(x))
                 .setVariable("e", Math.E);
 
         return expression.evaluate();

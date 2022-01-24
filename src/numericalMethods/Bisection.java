@@ -1,6 +1,6 @@
 package numericalMethods;
 
-import rootestimator.FunctionInput;
+import rootestimator.Function;
 import rootestimator.View;
 
 public class Bisection {
@@ -13,7 +13,7 @@ public class Bisection {
     }
 
     public double getRoot() {
-        var function = new FunctionInput(this.view);
+        var function = new Function(this.view);
 
         count = 0;
         double lowerBound;
