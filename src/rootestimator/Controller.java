@@ -1,27 +1,41 @@
 package rootestimator;
 
-import numericalMethods.NewtonRaphson;
-import numericalMethods.Secant;
+import function.Function;
+import function.Plot;
+import numericalmethods.NewtonRaphson;
+import numericalmethods.Secant;
+import tabledata.Table;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 public class Controller {
-    public Controller(View view) {
-        Function function = new Function(view);
-        NewtonRaphson newton = new NewtonRaphson(view);
-        Secant secant = new Secant(view);
 
-        Plot plot = new Plot(view, function, newton, secant);
+    public Controller(View view) {
+        var function = new Function(view);
+        var newton = new NewtonRaphson(view);
+        var secant = new Secant(view);
+
+        var plot = new Plot(view, function, newton, secant);
+
+        var ref = new Object() {
+            Table tableData;
+        };
 
         //Default on application open
         function.plot();
-//        newton.getRoot();
-//        secant.getRoot();
 
-        view.getFunctionOneButton().addActionListener(e -> plot.exampleFunctionOne());
-        view.getFunctionTwoButton().addActionListener(e -> plot.exampleFunctionTwo());
-        view.getFunctionThreeButton().addActionListener(e -> plot.exampleFunctionThree());
+        //Plot example functions
+        view.getFunctionOneButton().addActionListener(ae -> plot.exampleFunctionOne());
+        view.getFunctionTwoButton().addActionListener(ae -> plot.exampleFunctionTwo());
+        view.getFunctionThreeButton().addActionListener(ae -> plot.exampleFunctionThree());
+
+        //Open TableData
+        view.getOpenTableData().addActionListener(ae -> new Table());
+
+//        view.getOpenTableData().addActionListener(ae -> {
+//            if (ref.tableData == null) ref.tableData = new TableData();
+//        });
 
         //<editor-fold defaultstate="collapsed" desc="Function">
         view.getFunctionTextfield().getDocument().addDocumentListener(new DocumentListener() {

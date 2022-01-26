@@ -1,6 +1,6 @@
-package numericalMethods;
+package numericalmethods;
 
-import rootestimator.Function;
+import function.Function;
 import rootestimator.View;
 
 public class Bisection {

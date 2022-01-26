@@ -1,7 +1,8 @@
-package rootestimator;
+package function;
 
-import numericalMethods.NewtonRaphson;
-import numericalMethods.Secant;
+import numericalmethods.NewtonRaphson;
+import numericalmethods.Secant;
+import rootestimator.View;
 
 public class Plot {
 

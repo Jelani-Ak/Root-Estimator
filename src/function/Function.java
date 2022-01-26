@@ -1,7 +1,8 @@
-package rootestimator;
+package function;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import rootestimator.View;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -27,19 +28,15 @@ public class Function {
         final double PLOT_ACCURACY = (double) view.getPlotAccuracySpinner().getValue();
 
         // Positive side
-        for (double x = 0.0; x <= UPPER_RANGE; x += PLOT_ACCURACY) {
+        for (double x = 0.0; x <= (UPPER_RANGE + PLOT_ACCURACY); x += PLOT_ACCURACY) {
             if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
-
             view.getFunctionSeries().add(x, f(x));
-//            System.out.println("x = " + x);
         }
 
         // Negative side
-        for (double x = 0.0; x >= LOWER_RANGE; x -= PLOT_ACCURACY) {
+        for (double x = 0.0; x >= (LOWER_RANGE - PLOT_ACCURACY); x -= PLOT_ACCURACY) {
             if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
-
             view.getFunctionSeries().add(x, f(x));
-//            System.out.println("x = " + x);
         }
     }
 

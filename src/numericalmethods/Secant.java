@@ -1,6 +1,6 @@
-package numericalMethods;
+package numericalmethods;
 
-import rootestimator.Function;
+import function.Function;
 import rootestimator.View;
 
 public class Secant {
@@ -17,15 +17,13 @@ public class Secant {
 
         count = 0;
         double xnew;
-        double xold = 0.0;
-        double x = 0.0;
+        double xold = 0.0, x = 0.0;
         double y;
         double difference;
 
         try {
-            if (view.secantTextfieldsAreEmpty()) {
-                return 0.0;
-            } else {
+            if (view.secantTextfieldsAreEmpty()) return 0.0;
+            else {
                 x = Double.parseDouble(view.getSecantTextfieldOne().getText());
                 xold = Double.parseDouble(view.getSecantTextfieldTwo().getText());
             }
@@ -37,21 +35,19 @@ public class Secant {
 
         do {
             count++;
-
             xnew = x - function.f(x) * (x - xold) / (function.f(x) - function.f(xold));
             y = function.f(xnew);
 
-            //Plot in the correct order
+            //Plot in positive order
             if (XSTART > 0) {
-                if (count == 1) {
-                    view.getSecantSeries().add(XSTART, function.f(XSTART));
-                }
+                if (count == 1) view.getSecantSeries().add(XSTART, function.f(XSTART));
                 view.getSecantSeries().add(xnew, y);
                 view.getSecantSeries().add(xnew, 0);
-            } else if (XSTART < 0) {
-                if (count == 1) {
-                    view.getSecantSeries().add(XSTART, function.f(XSTART));
-                }
+            }
+
+            //Plot in negative order
+            if (XSTART < 0) {
+                if (count == 1) view.getSecantSeries().add(XSTART, function.f(XSTART));
                 view.getSecantSeries().add(xnew, 0);
                 view.getSecantSeries().add(xnew, y);
             }
