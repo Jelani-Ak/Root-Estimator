@@ -11,6 +11,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import gui.main.MainMenuBar;
 
 public class View {
     private final XYSeries functionSeries;
@@ -33,7 +34,6 @@ public class View {
     private final JSpinner upperRangeSpinner;
     private final JSpinner plotAccuracySpinner;
 
-
     private final JButton functionOneButton;
     private final JButton functionTwoButton;
     private final JButton functionThreeButton;
@@ -53,6 +53,8 @@ public class View {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        var menuBar = new MainMenuBar();
 
         //<editor-fold defaultstate="collapsed" desc="Panels">
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -297,8 +299,10 @@ public class View {
         plotAccuracySpinner.getPreferredSize();
 
 
+
         //<editor-fold defaultstate="collapsed" desc="Interface adding">
         frame.add(mainPanel);
+        frame.setJMenuBar(menuBar);
 
         mainPanel.add(optionsPanel, BorderLayout.EAST);
         mainPanel.add(graphPanel, BorderLayout.CENTER);
@@ -338,24 +342,12 @@ public class View {
         return functionTextfield;
     }
 
-    public boolean functionTextfieldIsEmpty() {
-        return (functionTextfield.getText().isEmpty() || functionTextfield.getText() == null);
-    }
-
     public JTextField getNewtonTextfield() {
         return newtonTextfield;
     }
 
-    public boolean newtonTextfieldIsEmpty() {
-        return (newtonTextfield.getText().isEmpty() || newtonTextfield.getText() == null);
-    }
-
     public JTextField getDerivativeTextfield() {
         return derivativeTextfield;
-    }
-
-    public boolean DerivativeTextfieldIsEmpty() {
-        return (derivativeTextfield.getText().isEmpty() || derivativeTextfield.getText() == null);
     }
 
     public JTextField getSecantTextfieldOne() {
@@ -372,20 +364,6 @@ public class View {
 
     public JTextField getBisectionTextfieldTwo() {
         return bisectionTextfieldTwo;
-    }
-
-    public boolean secantTextfieldsAreEmpty() {
-        return (secantTextfieldOne.getText().isEmpty()
-                || secantTextfieldOne.getText() == null
-                || secantTextfieldTwo.getText().isEmpty()
-                || secantTextfieldTwo.getText() == null);
-    }
-
-    public boolean bisectionTextfieldsAreEmpty() {
-        return (bisectionTextfieldOne.getText().isEmpty()
-                || bisectionTextfieldOne.getText() == null
-                || bisectionTextfieldTwo.getText().isEmpty()
-                || bisectionTextfieldTwo.getText() == null);
     }
 
     public XYSeries getFunctionSeries() {
@@ -442,6 +420,34 @@ public class View {
 
     public JSpinner getPlotAccuracySpinner() {
         return plotAccuracySpinner;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Validation Checking">
+    public boolean functionTextfieldIsEmpty() {
+        return (functionTextfield.getText().isEmpty() || functionTextfield.getText() == null);
+    }
+
+    public boolean newtonTextfieldIsEmpty() {
+        return (newtonTextfield.getText().isEmpty() || newtonTextfield.getText() == null);
+    }
+
+    public boolean DerivativeTextfieldIsEmpty() {
+        return (derivativeTextfield.getText().isEmpty() || derivativeTextfield.getText() == null);
+    }
+
+    public boolean secantTextfieldsAreEmpty() {
+        return (secantTextfieldOne.getText().isEmpty()
+                || secantTextfieldOne.getText() == null
+                || secantTextfieldTwo.getText().isEmpty()
+                || secantTextfieldTwo.getText() == null);
+    }
+
+    public boolean bisectionTextfieldsAreEmpty() {
+        return (bisectionTextfieldOne.getText().isEmpty()
+                || bisectionTextfieldOne.getText() == null
+                || bisectionTextfieldTwo.getText().isEmpty()
+                || bisectionTextfieldTwo.getText() == null);
     }
     //</editor-fold>
 
