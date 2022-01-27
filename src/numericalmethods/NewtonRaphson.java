@@ -23,9 +23,7 @@ public class NewtonRaphson {
 
     public void getRoot() {
         count = 0;
-        double xold, x, y, difference, tolerance = getTolerance();
-
-        x = getX(getNewtonValue());
+        double xold, x = getNewton(), y, difference, tolerance = getTolerance();
 
         final double XSTART = x;
 
@@ -47,9 +45,7 @@ public class NewtonRaphson {
         var newtonTableData = new Object[getCount()][5];
 
         int index = 0, count = 1;
-        double xold, x, y, difference, tolerance = getTolerance();
-
-        x = getX(getNewtonValue());
+        double xold, x = getNewton(), y, difference, tolerance = getTolerance();
 
         do {
             xold = x;
@@ -70,21 +66,13 @@ public class NewtonRaphson {
         return count;
     }
 
-    public double getX(double x) {
-        try {
-            if (view.newtonTextfieldIsEmpty()) return 0.0;
-        } catch (NumberFormatException nfe) {
-            //Do nothing
-        }
-        return x;
+    public double getNewton() {
+        double x = Double.parseDouble(view.getNewtonTextfield().getText());
+        return x != 0.0 ? x : 0.0;
     }
 
     public double getTolerance() {
         return Double.parseDouble(view.getToleranceTextField().getText());
-    }
-
-    public double getNewtonValue() {
-        return Double.parseDouble(view.getNewtonTextfield().getText());
     }
 
     public void plotPositiveSide(double XSTART, double x, double y) {
