@@ -6,19 +6,14 @@ import numericalmethods.NewtonRaphson;
 import numericalmethods.Secant;
 import tabledata.TableView;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
 public class Controller {
 
     public Controller(View view, TableView tableView) {
         var function = new Function(view);
-        var newton = new NewtonRaphson(view, tableView);
+        var newton = new NewtonRaphson(view, function, tableView);
         var secant = new Secant(view);
 
         var plot = new Plot(view, function, newton, secant);
