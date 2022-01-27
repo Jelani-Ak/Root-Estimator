@@ -42,11 +42,7 @@ public class Function {
 
     // Format the decimal places of a number to a user specified value
     public String setDecimalPoint(Double number) {
-        return String.format("%." + (int) view.getDecimalSpinner().getValue() + "f", number);
-    }
-
-    public String setSpecificDecimalPoint(Integer number, int x) {
-        return String.format("%." + x + "f", number);
+        return String.format("%." + view.getDecimalSpinner().getValue() + "f", number);
     }
 
     public double round(double value, int places) {

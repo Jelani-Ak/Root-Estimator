@@ -2,32 +2,32 @@ package numericalmethods;
 
 import function.Function;
 import rootestimator.View;
-import tabledata.TableModel;
 import tabledata.TableView;
 
-public class NewtonRaphson {
-    private final View view;
+import javax.swing.table.DefaultTableModel;
 
+public class NewtonRaphson {
     private int count;
 
-    private Object[][] newtonTableData;
+    private final View view;
+    private final TableView tableView;
 
-    public NewtonRaphson(View view) {
+    private final String[] newtonTableColumnNames = {"Iteration", "xold", "x", "y", "difference"};
+
+    public NewtonRaphson(View view, TableView tableView) {
         this.view = view;
+        this.tableView = tableView;
     }
 
-    public double getRoot() {
+    public void getRoot() {
         var function = new Function(this.view);
 
         count = 0;
-        int index = 0;
-        double xold;
-        double x = 0.0;
-        double y;
-        double difference;
+        double xold, x = 0.0, y, difference;
+        double tolerance = Double.parseDouble(view.getToleranceTextField().getText());
 
         try {
-            if (view.newtonTextfieldIsEmpty()) return 0.0;
+            if (view.newtonTextfieldIsEmpty()) return;
             else x = Double.parseDouble(view.getNewtonTextfield().getText());
         } catch (NumberFormatException nfe) {
             //Do nothing
@@ -55,37 +55,47 @@ public class NewtonRaphson {
                 view.getNewtonSeries().add(x, 0);
                 view.getNewtonSeries().add(x, y);
             }
+
             difference = Math.abs(xold - x);
-        } while (difference > 0.00001);
+        } while (difference > tolerance);
 
-        newtonTableData = new Object[count][5];
+    }
 
-        // Add data to table
-        if (view.getNewtonCheckBox().isSelected()) {
-            do {
-                xold = x;
-                x = x - (function.f(x) / function.d(x));
-                y = function.f(x);
-                difference = Math.abs(xold - x);
+    public void addDataToTable() {
+        var function = new Function(this.view);
+        var newtonTableData = new Object[getCount()][5];
 
-                newtonTableData[index][0] = index;
-                newtonTableData[index][1] = xold;
-                newtonTableData[index][2] = x;
-                newtonTableData[index][3] = y;
-                newtonTableData[index][4] = difference;
+        int index = 0, count = 1;
+        double xold, x = 0.0, y, difference;
+        double tolerance = Double.parseDouble(view.getToleranceTextField().getText());
 
-                index++;
-            } while (difference > 0.00001);
+        try {
+            if (view.newtonTextfieldIsEmpty()) x = 0.0;
+            else x = Double.parseDouble(view.getNewtonTextfield().getText());
+        } catch (NumberFormatException nfe) {
+            //Do nothing
         }
 
-        return x;
+        do {
+            xold = x;
+            x = x - (function.f(x) / function.d(x));
+            y = function.f(x);
+            difference = Math.abs(xold - x);
+
+            newtonTableData[index][0] = count;
+            newtonTableData[index][1] = function.setDecimalPoint(xold);
+            newtonTableData[index][2] = function.setDecimalPoint(x);
+            newtonTableData[index][3] = function.setDecimalPoint(y);
+            newtonTableData[index][4] = function.setDecimalPoint(difference);
+
+            index++;
+            count++;
+        } while (difference > tolerance);
+
+        tableView.getNewtonTable().setModel(new DefaultTableModel(newtonTableData, newtonTableColumnNames));
     }
 
     public int getCount() {
         return count;
-    }
-
-    public Object[][] getNewtonTableData() {
-        return newtonTableData;
     }
 }

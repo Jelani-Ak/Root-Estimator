@@ -1,26 +1,19 @@
 package tabledata;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class TableView {
 
-    JTable newtonTable;
-    JTable secantTable;
-    JTable bisectionTable;
+    private final JTable newtonTable;
+    private final JTable secantTable;
+    private final JTable bisectionTable;
 
-//    String[] mockLabel = {"zero", "one", "two"}; //Delete later
-//    Object[][] mockData = {
-//            {"[0, 1]", "[0, 2]", "[0, 3]"},
-//            {"[1, 1]", "[1, 2]", "[1, 3]"},
-//            {"[2, 1]", "[2, 2]", "[2, 3]"},
-//            {"[3, 1]", "[3, 2]", "[3, 3]"},
-//            {"[4, 1]", "[4, 2]", "[4, 3]"}
-//    }; //Delete later
+    private final JDialog tableFrame;
 
     public TableView() {
-        var tableFrame = new JDialog();
+        tableFrame = new JDialog();
 
         var tablePanel = new JPanel(new BorderLayout());
 
@@ -47,11 +40,11 @@ public class TableView {
         bisectionPanelTable.add(new JScrollPane(bisectionTable));
 
         //<editor-fold defaultstate="collapsed" desc="Default Window Configurations">
-        tableFrame.setSize(825, 903); //Window Dimensions
+        tableFrame.setSize(825, 900);
         //setResizable(false);
-        tableFrame.setLocationRelativeTo(null); //Centers the window
-        tableFrame.setTitle("Tabular Data"); //Title
-        tableFrame.setVisible(true); //Display everything
+        tableFrame.setLocationRelativeTo(null);
+        tableFrame.setTitle("Table");
+        tableFrame.dispatchEvent(new WindowEvent(tableFrame, WindowEvent.WINDOW_CLOSING));
         //</editor-fold>
     }
 
@@ -68,4 +61,11 @@ public class TableView {
         return bisectionTable;
     }
     //</editor-fold>
+
+
+    public void setVisible() {
+        tableFrame.setVisible(true);
+        tableFrame.setSize(825, 900);
+        tableFrame.setLocationRelativeTo(null);
+    }
 }

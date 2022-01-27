@@ -50,14 +50,14 @@ public class View {
         var mainFrame = new JFrame();
 
         var mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
+//        mainPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED))); //For debugging purposes, delete later
 
         var mainComponentPanel = new JPanel();
         mainComponentPanel.setLayout(new GridBagLayout());
-        mainComponentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
+//        mainComponentPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE))); //For debugging purposes, delete later
 
-        var mainOptionsPanel = new JPanel(new BorderLayout());
-        mainOptionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
+        var mainOptionsPanel = new JPanel();
+//        mainOptionsPanel.setBorder((BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GREEN))); //For debugging purposes, delete later
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -137,7 +137,7 @@ public class View {
         mainComponentPanel.add(exampleFunctionsTextPanel, gbc);
 
         functionOneButton = new JButton("<html>x - x<sup>2</sup></hmtl>");
-        functionTwoButton = new JButton("<html>log<sub>e</sub>(x + 1) + 1</html>");
+        functionTwoButton = new JButton("<html>ln(x + 1) + 1</html>");
         functionThreeButton = new JButton("<html>e<sup>x</sup> - 3x</hmtl>");
 
         exampleFunctionsTextPanel.add(functionOneButton);

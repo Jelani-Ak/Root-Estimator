@@ -8,13 +8,13 @@ public class Plot {
 
     private final View view;
 
-    private final Function functionInput;
+    private final Function function;
     private final NewtonRaphson newton;
     private final Secant secant;
 
-    public Plot(View view, Function functionInput, NewtonRaphson newton, Secant secant) {
+    public Plot(View view, Function function, NewtonRaphson newton, Secant secant) {
         this.view = view;
-        this.functionInput = functionInput;
+        this.function = function;
         this.newton = newton;
         this.secant = secant;
     }
@@ -25,7 +25,7 @@ public class Plot {
             view.clearPlotData(view.getFunctionSeries());
             view.clearPlotData(view.getNewtonSeries());
             view.clearPlotData(view.getSecantSeries());
-            functionInput.plot();
+            function.plot();
         } catch (Exception ex) {
             // Do nothing
         }
