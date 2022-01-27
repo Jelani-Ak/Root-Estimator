@@ -45,6 +45,7 @@ public class TableView {
         tableFrame.setLocationRelativeTo(null);
         tableFrame.setTitle("Table");
         tableFrame.dispatchEvent(new WindowEvent(tableFrame, WindowEvent.WINDOW_CLOSING));
+        tableFrame.setVisible(false);
         //</editor-fold>
     }
 

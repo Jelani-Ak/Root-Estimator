@@ -29,13 +29,13 @@ public class Function {
 
         // Positive side
         for (double x = 0.0; x <= (UPPER_RANGE + PLOT_ACCURACY); x += PLOT_ACCURACY) {
-            if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
+            if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY) break;
             view.getFunctionSeries().add(x, f(x));
         }
 
         // Negative side
         for (double x = 0.0; x >= (LOWER_RANGE - PLOT_ACCURACY); x -= PLOT_ACCURACY) {
-            if (Double.isNaN(f(x)) || f(x) == Double.POSITIVE_INFINITY || f(x) == Double.NEGATIVE_INFINITY) break;
+            if (Double.isNaN(f(x)) || f(x) == Double.NEGATIVE_INFINITY) break;
             view.getFunctionSeries().add(x, f(x));
         }
     }

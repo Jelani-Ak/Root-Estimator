@@ -19,7 +19,7 @@ public class Controller {
         var plot = new Plot(view, function, newton, secant);
 
         //Default on application open
-        function.plot();
+        plot.function();
 
         //Plot example functions
         view.getFunctionOneButton().addActionListener(ae -> plot.exampleFunctionOne());
@@ -32,6 +32,11 @@ public class Controller {
             else view.clearPlotData(view.getNewtonSeries());
         });
 
+        //Plot/clear Secant on CheckBox selection
+        view.getSecantCheckBox().addActionListener(e -> {
+            if (view.getSecantCheckBox().isSelected()) plot.secant();
+            else view.clearPlotData(view.getSecantSeries());
+        });
 
         //Open and/or plot TableData
         view.getOpenTableData().addActionListener(ae -> {
