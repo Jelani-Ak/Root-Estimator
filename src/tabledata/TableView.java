@@ -46,6 +46,7 @@ public class TableView {
         tableFrame.setTitle("Table");
         tableFrame.dispatchEvent(new WindowEvent(tableFrame, WindowEvent.WINDOW_CLOSING));
         tableFrame.setVisible(false);
+        alternateTableRowColours();
         //</editor-fold>
     }
 
@@ -68,5 +69,11 @@ public class TableView {
         tableFrame.setVisible(true);
         tableFrame.setSize(825, 900);
         tableFrame.setLocationRelativeTo(null);
+    }
+
+    private void alternateTableRowColours() {
+        UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+        String row = "Table.alternateRowColor";
+        if (defaults.get(row) == null) defaults.put(row, new Color(240, 240, 240));
     }
 }

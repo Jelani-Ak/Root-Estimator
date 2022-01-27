@@ -22,7 +22,7 @@ public class Function {
         return evaluate(view.getDerivativeTextfield().getText(), x);
     }
 
-    public void plot() {
+    protected void plot() {
         final int UPPER_RANGE = (int) view.getUpperRangeSpinner().getValue();
         final int LOWER_RANGE = (int) view.getLowerRangeSpinner().getValue();
         final double PLOT_ACCURACY = (double) view.getPlotAccuracySpinner().getValue();

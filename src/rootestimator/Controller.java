@@ -14,39 +14,43 @@ public class Controller {
     public Controller(View view, TableView tableView) {
         var function = new Function(view);
         var newton = new NewtonRaphson(view, function, tableView);
-        var secant = new Secant(view);
+        var secant = new Secant(view, function, tableView);
 
         var plot = new Plot(view, function, newton, secant);
 
-        //Default on application open
+        // Plot default function on application open
         plot.function();
 
-        //Plot example functions
+        // Plot example functions
         view.getFunctionOneButton().addActionListener(ae -> plot.exampleFunctionOne());
         view.getFunctionTwoButton().addActionListener(ae -> plot.exampleFunctionTwo());
         view.getFunctionThreeButton().addActionListener(ae -> plot.exampleFunctionThree());
 
-        //Plot/clear Newton on CheckBox selection
+        // Plot or clear Newton on CheckBox selection
         view.getNewtonCheckBox().addActionListener(e -> {
-            if (view.getNewtonCheckBox().isSelected()) plot.newton();
-            else view.clearPlotData(view.getNewtonSeries());
-        });
-
-        //Plot/clear Secant on CheckBox selection
-        view.getSecantCheckBox().addActionListener(e -> {
-            if (view.getSecantCheckBox().isSelected()) plot.secant();
-            else view.clearPlotData(view.getSecantSeries());
-        });
-
-        //Open and/or plot TableData
-        view.getOpenTableData().addActionListener(ae -> {
             try {
+                if (view.getNewtonCheckBox().isSelected()) plot.newton();
+                else view.clearPlotData(view.getNewtonSeries());
                 newton.addDataToTable();
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 // Do nothing
-            } finally {
-                tableView.setVisible();
             }
+        });
+
+        // Plot or clear Secant on CheckBox selection
+        view.getSecantCheckBox().addActionListener(e -> {
+            try {
+                if (view.getSecantCheckBox().isSelected()) plot.secant();
+                else view.clearPlotData(view.getSecantSeries());
+                secant.addDataToTable();
+            } catch (Exception ex) {
+                // Do nothing
+            }
+        });
+
+        // Open and/or populate TableData
+        view.getOpenTableData().addActionListener(ae -> {
+            tableView.setVisible();
         });
 
         //<editor-fold defaultstate="collapsed" desc="Function">

@@ -76,7 +76,7 @@ public class Plot {
     public void newton() {
         try {
             view.clearPlotData(view.getNewtonSeries());
-            newton.getRoot();
+            newton.getFinalRootValue();
         } catch (Exception ex) {
             // Do nothing
         }
@@ -85,7 +85,7 @@ public class Plot {
     public void secant() {
         try {
             view.clearPlotData(view.getSecantSeries());
-            secant.getRoot();
+            secant.getFinalRootValue();
         } catch (Exception ex) {
             // Do nothing
         }
